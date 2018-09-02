@@ -1,0 +1,45 @@
+
+tr{
+    font-size: 1.3rem;
+    line-height: 2rem;
+    border-bottom : 1px dotted #777;
+
+}
+
+table.submissionsTable {
+    font-family: Tahoma, Geneva, sans-serif;
+    border: 0px solid #FFFFFF;
+    width: 700px;
+    height: 150px;
+    text-align: center;
+    border-collapse: collapse;
+    margin: auto;
+  }
+  table.submissionsTable td, table.submissionsTable th {
+    border: 7px solid #FFFFFF;
+    padding: 3px 2px;
+    
+  }
+  table.submissionsTable tbody td {
+    font-size: 13px;
+  }
+  table.submissionsTable tr:nth-child(even) {
+    background: #D0E4F5;
+    
+  }
+  table.submissionsTable thead {
+    background: #7892c2;
+    border-bottom: 5px solid #FFFFFF;
+  }
+  table.submissionsTable thead th {
+    font-size: 17px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #FFFFFF;
+  }
+  table.submissionsTable thead th:first-child {
+    border-left: none;
+  }
+  
+ 
