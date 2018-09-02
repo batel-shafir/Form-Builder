@@ -12,4 +12,4 @@ Instructions:
 - Go back to \Form-Builder-App-master by typing 'cd ..'.
 - Type "npm install" and press enter. 
 - Type "npm run dev" and press enter.
-- Open your browser and go to http://localhost:3000
+😬 GOOD LUCK TO ME
