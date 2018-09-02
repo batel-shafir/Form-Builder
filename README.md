@@ -5,7 +5,9 @@ Welcome to the Form Builder application.
 
 Instructions:
 1 Download the Form-Builder-App-master ZIP.
+
 2 Extract the files.
+
 3 Open the terminal.
 4 cd into \Form-Builder-App-master\client.
 5 Type "npm install" and press enter.
