@@ -1,24 +1,15 @@
-# Form Builder App
+# Form Builder Application
 
-Welcome to the Form Builder application. This app is simple, you can create a custom form and anyone can submit answer.
+Hi! 
+Welcome to the Form Builder application.
 
 Instructions:
-- Download the Wix-Form-Builder-master ZIP.
-- Extract the files.
-- Open the terminal.
-- cd into \Wix-Form-Builder-master.
-- Type "npm i" and press enter. this may take a minute.
-- when done, cd into \Server.
-- Type "npm i" and press enter. this may take a minute.
-- when done, type "npm run dev" and press enter.
-- Open your browser and go to http://localhost:8080
-- Enjoy the app :+1:
-
-
-#### Importent note ! ####
-I accidently installed general packages in my project. as you can see the "package-lock.json" files are unnecessarily HUGE,
-so the installation proccess may take up to two minutes.
-I am aware to this error I caused.
-All of my attempts to minimize the json file failed, so I uploaded the original one.
-
-
+1 Download the Form-Builder-App-master ZIP.
+2 Extract the files.
+3 Open the terminal.
+4 cd into \Form-Builder-App-master\client.
+5 Type "npm install" and press enter.
+6 Go back to \Form-Builder-App-master by typing 'cd ..'.
+7 Type "npm install" and press enter. 
+8 Type "npm run dev" and press enter.
+9 Open your browser and go to http://localhost:3000
