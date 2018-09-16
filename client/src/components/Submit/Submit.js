@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import { ReCaptcha } from 'react-recaptcha-google'
 import './Submit.css';
+
 
 /**
  * Submit component - form is presented and is being submitted.
  */
 class Submit extends Component {
-    constructor(){
-        super();
+    constructor(props, context){
+        super(props,context);
+        this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+        this.verifyCallback = this.verifyCallback.bind(this);
         this.state = {
         formId : '', //id
         formName : '' , //name
@@ -36,6 +40,21 @@ class Submit extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.captchaDemo) {
+            console.log("started, just a second...")
+            this.captchaDemo.reset();
+        }
+      }
+      onLoadRecaptcha() {
+          if (this.captchaDemo) {
+              this.captchaDemo.reset();
+          }
+      }
+      verifyCallback(recaptchaToken) {
+        // Here you will get the final recaptchaToken!!!  
+        console.log(recaptchaToken, "<= your recaptcha token")
+      }
     /**
    * This function allows change of inputs by name
    */
@@ -76,12 +95,13 @@ class Submit extends Component {
     updateServer(data) { 
         var http = new XMLHttpRequest(); 
         var url = 'http://localhost:5000/api/submit';
-        http.open('POST', url, true);
+        http.open('POST', url, false);
         //Send the proper header information along with the request
         http.setRequestHeader('Content-type', 'application/json');
         var jsonObject = JSON.stringify(data);   
         http.send(jsonObject);
-        alert("Submitted Successfully! Click 'Back'");      
+        //alert("Submitted Successfully! Click 'Back'");
+        this.setRedirect();      
     }
 
      /**
@@ -102,32 +122,48 @@ class Submit extends Component {
         })
     }
 
-    render() {    
+    render() {  
         const data = this.props.location.state;  ///form
         this.componentDidUpdate(data);
-        return (
-            <div ><br/><br/>
-                <h3>{this.state.formName}</h3>
-                <form>
-                    {this.state.formFields.map((field,key) => (
-                        <label key={key} name ={field.label}>
-                        {field.name}&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input 
-                                name={field.name}  
-                                value={field.input}                   
-                                onChange={this.handleInputChange}
-                                type={field.type}
-                            /> <br/><br/>
-                        </label> 
-                    ))}
-                </form><br/>
-                <div>
-                    <button onClick={this.handleSubmit} className="btn btn-primary">Submit</button>  
-                </div>
-                <div> {this.renderRedirect()}
-                    <button type="button"  onClick ={this.setRedirect} className="save-btn">Back</button>
-                </div>
-            </div>
+        return (          
+            <html>
+                <head>
+                    <br/><br/>
+                    <h1>{this.state.formName}</h1>
+        
+                </head>
+                <body> 
+                    <form><br/>
+                        {this.state.formFields.map((field,key) => (
+                            <label key={key} name ={field.label}>
+                            {field.name}&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input 
+                                    name={field.name}  
+                                    value={field.input}                   
+                                    onChange={this.handleInputChange}
+                                    type={field.type}
+                                /> <br/><br/>
+                            </label> 
+                        ))}
+                      
+                    </form><br/>
+                    <ReCaptcha
+            ref={(el) => {this.captchaDemo = el;}}
+            size="normal"
+            data-theme="dark"            
+            render="explicit"
+            sitekey="6LdXe3AUAAAAAMobGT_-EGPzVfdTYEL4fApIalhM"
+            onloadCallback={this.onLoadRecaptcha}
+            verifyCallback={this.verifyCallback}
+        />
+                    <div>{this.renderRedirect()}
+                        <button onClick={this.handleSubmit} className="save-btn">Submit</button>  
+                    </div>
+                    <div> {this.renderRedirect()}
+                        <button type="button"  onClick ={this.setRedirect} className="save-btn">Back</button>
+                    </div>
+            </body>
+            </html>
         );//return
     }//render
 }//component
