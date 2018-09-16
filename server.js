@@ -3,8 +3,7 @@ const app = express();
 
 const dataBase = {
   idx : 0 ,
-  forms : [
-    ]
+  forms : []
   }
 
 app.get('/api/forms', (req, res) => {
@@ -36,7 +35,7 @@ app.post('/api/form-builder', (req, res) => {
     allSubmissions : []   
   }
   dataBase.forms.push(newForm); 
-  res.writeContinue
+  res.send("ack");
 });
 
 app.post('/api/submit', (req, res) => {
@@ -53,8 +52,40 @@ app.post('/api/submit', (req, res) => {
         break;
       }
   }
-   res.writeContinue()
+  res.send("ack");
 });
+
+app.post('/api/verify', (req, res) => {
+  if(
+    req.body.captcha === undefined ||
+    req.body.captcha === '' ||
+    req.body.captcha === null
+  ){
+    return res.json({"success": false, "msg":"Please select captcha"})
+  }
+
+  //secret key
+  const secretKey = '6LdXe3AUAAAAACGPr8gxdGgEK3bb72a3HTkYfpc_';
+
+  //verify URL
+  const verifyURL = `https://google.com/recaptcha/api/siteverify?secret = 
+  ${secretKey}&response=${req.body.captcha}&remoteip=
+  ${req.connection.remoteAddress}`;
+
+  //Make request to verify url
+  request(verifyURL, (err, response , body)=> {
+    body = JSON.parse(body);
+
+    //if not successful
+    if(body.success!== undefined && !body.success){
+      return res.json({"success": false, "msg":"Failed captcha verification"})
+    }
+
+    //if successful
+    return res.json({"success": true, "msg":"captcha passed"})
+  })
+});
+
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
