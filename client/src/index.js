@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 
 import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
-import App from './App';
+import App from './App.jsx';
 
+//var Recaptcha = require('react-recaptcha');
 
-
-ReactDOM.render((
-<Router>
-        <div>
+ReactDOM.render((  
+    <Router>
             <App />
-        </div>
-</Router>
- 
+    </Router>
+
 
 ),
 document.getElementById('root'));
