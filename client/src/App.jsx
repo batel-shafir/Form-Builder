@@ -6,24 +6,25 @@ import FormBuilder from "./components/FormBuilder/FormBuilder";
 import Submissions from "./components/Submissions/Submissions";
 import Submit from "./components/Submit/Submit";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { loadReCaptcha } from 'react-recaptcha-google'
 
 class App extends Component {
+  componentDidMount() {
+    loadReCaptcha();
+  }
   render() {
     return (
-      <div className="App">
+    
         <Router>
-          <div>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/home" component={Home} />
                 <Route path="/form-builder" component={FormBuilder} />
                 <Route path="/submissions" component={Submissions} />
                 <Route path="/submit" component={Submit} />
-              </Switch>
-          </div>
+              </Switch> 
         </Router>
-      </div>
+    
     );//return
   }//render
 }//component
